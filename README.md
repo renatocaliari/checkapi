@@ -1,5 +1,6 @@
-api-tests
-=========
+=======
+DoForMeApiTest
+==============
 
 Client API (wrapper) and Functional tests for Apontador's API.
 
