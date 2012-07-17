@@ -1,5 +1,4 @@
-/test/api/configApiV*.json
-/test/api/apiV*.vows.js
+/test/api/*
 
 *.log
 *.sublime*
