@@ -128,7 +128,7 @@ Put here all params (or dynamic value to urls) that you want to use with multipl
 ### Dynamic values for positive scenario
 
 Imagine that you need to test a resource that have a constraint to unique values. You can do it in the following way:
-Inside "value" of a scenario, type the char $ and followed by a valid function name.
+Inside "value" of a scenario, type the char ***$*** followed by a valid function name.
 
 Example: 
 ```
