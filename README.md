@@ -3,7 +3,7 @@
 Mini-initial-framework to generate dynamics scenarios to test APIs and call yours resources with those ones allowing you to make assertions on results.   
 
 It is written in javascript and it uses Vows (to API tests) and Mocha (to helpers tests).
-Vows aloows to create dynamic contexts (test cases) to API.
+Vows allows to create dynamic contexts (test cases) to API.
 
 ## Prerequisites
 Step 1: Install node and npm.
