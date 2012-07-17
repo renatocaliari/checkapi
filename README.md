@@ -123,7 +123,8 @@ Put here all params (or dynamic value to urls) that you want to use with multipl
             } 
         }
     ]
-    
+```
+
 ### Dynamic values for positive scenario
 
 Imagine that you need to test a resource that have a constraint to unique values. You can do it in the following way:
@@ -141,6 +142,6 @@ Example:
 }
 ```
 
-Note the value ***$randomText(20)***. Now, you can ask: where is that function?
+Note the value ***$randomText(20)***. Now, you can ask: ***WHERE is that function?***
 The system will search that function in "/lib/helper/config.js" file. That function is there just for the sake of example.
 That file should contain all your helper functions that you wants to generate dynamic values in config file.
