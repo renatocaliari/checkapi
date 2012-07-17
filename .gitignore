@@ -1,3 +1,6 @@
+/test/api/configApiV*.json
+/test/api/apiV*.vows.js
+
 *.log
 *.sublime*
 .DS_Store
@@ -9,7 +12,6 @@ lib-cov
 *.out
 *.pid
 *.gz
-
 pids
 logs
 results
