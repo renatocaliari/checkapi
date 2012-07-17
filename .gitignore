@@ -1,7 +1,6 @@
 *.log
 *.sublime*
 .DS_Store
-/test/api
 lib-cov
 *.seed
 *.log

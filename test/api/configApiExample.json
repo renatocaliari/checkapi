@@ -1,0 +1,83 @@
+{
+    "api": {
+        "pathBase": "http://api.example.com",
+        "debug": "false", // show details on calls to api
+        "showScenarioOnError": "true" // show scenario data when happens error on calls
+    },
+    "auth": {
+        "requestTokenUrl": "http://api.example.com/v1-hm/oauth/request_token",
+        "accessTokenUrl": "http://api.example.com/v1-hm/oauth/access_token",
+        "authorizeUrl": "http://api.example.com/v1-hm/oauth/authorize",
+        "tokenKey": "",
+        "tokenSecret": "",
+        "consumerKey": "",
+        "consumerSecret": ""
+    },
+    "resources": [
+        {
+            "name": "Review a place",
+            "url": "/places/{placeId}/reviews/new",
+            "auth": "oauth",
+            "methodHttp": "put",
+            "params": [      
+                {
+                    "name": "rating",
+                    "scenario": {
+                        "positive": [
+                            {"value": "1", "statusHttp": "200"},
+                            {"value": "2", "statusHttp": "200"},
+                            {"value": "3", "statusHttp": "200"},
+                            {"value": "4", "statusHttp": "200"},
+                            {"value": "5", "statusHttp": "200"}
+                        ],
+                        "negative": [
+                            {"value": "0", "statusHttp": "400"},
+                            {"value": "6", "statusHttp": "400"},
+                            {"value": "a", "statusHttp": "400"},
+                            {"value": "é", "statusHttp": "400"}
+                        ]
+                    } 
+                }, 
+                {
+                    "name": "content",
+                    "scenario": {
+                        "positive": [
+                            { "value": "$randomText(20)", "statusHttp": "200" }
+                        ],
+                        "negative": 
+                            [{ "value": "", "statusHttp": "400" }
+                        ]
+                    } 
+                },
+                {
+                    "name": "type"
+                }
+            ]
+        },
+    ],
+    "paramsDefault":
+    [
+        {
+            "name": "type",
+            "scenario": {
+                "positive": [
+                    {"value": "json", "statusHttp": "200"},
+                    {"value": "xml", "statusHttp": "200"}                            
+                ],
+                "negative": [
+                    {"value": "a","statusHttp": "400"}
+                ]
+            } 
+        },
+        {   "name": "placeId",
+            "scenario": {
+                "positive": [{ "value": "ABC", "statusHttp": "200" }],
+                "negative": [
+                    { "value": "DEF", "statusHttp": "400" },
+                    { "value": "unknown", "statusHttp": "200"}
+                ]
+            }
+        }
+    ]
+}
+
