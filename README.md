@@ -1,11 +1,8 @@
-=======
-DoForMeApiTest
-==============
+# DoForMeApiTest
 
 Client API (wrapper) and Functional tests for Apontador's API.
 
-Prerequisites
-========
+## Prerequisites
 Step 1: Install node and npm.
 
 Step 2: Install all dependencies for the project.
@@ -24,24 +21,21 @@ Step 4: Install vows for run dynamic tests of API.
 npm install -g vows
 ```
 
-Steps to run all tests of helpers(client api, helpers and functional tests)
-=========
+## Steps to run all tests of helpers(client api, helpers and functional tests)
 
 Run the following command: 
 ```
 make test-others
 ```
 
-Steps to run the API tests
-=========
+## Steps to run the API tests
 
 Run the following command: 
 ```
 make test-api
 ```
 
-How to configure 
-=========
+## How to configure 
 
 Modify the file configApiExample.json (rename it for better readability) with the config of your api.
 
@@ -136,7 +130,7 @@ Example:
     "name": "content",
     "scenario": {
         "positive": [
-            { "value": "***$randomText(20)***", "statusHttp": "200" }
+            { "value": "$randomText(20)", "statusHttp": "200" }
         ]
     } 
 }
