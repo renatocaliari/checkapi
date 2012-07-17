@@ -5,9 +5,6 @@
         "showScenarioOnError": "true" // show scenario data when happens error on calls
     },
     "auth": {
-        "requestTokenUrl": "http://api.example.com/v1-hm/oauth/request_token",
-        "accessTokenUrl": "http://api.example.com/v1-hm/oauth/access_token",
-        "authorizeUrl": "http://api.example.com/v1-hm/oauth/authorize",
         "tokenKey": "",
         "tokenSecret": "",
         "consumerKey": "",
