@@ -21,7 +21,7 @@ npm install -g mocha
 npm install -g vows
 ```
 
-## Steps to run all tests of helpers(client api, helpers and functional tests)
+## Steps to run all tests of the helpers
 
 Run the following command: 
 ```
