@@ -1,4 +1,4 @@
-This generate dynamics scenarios based upon on a config file in addition to test API calls and their responses.   
+That mini-framework generate dynamics scenarios based upon on a config file in addition to test API calls and their responses.   
 
 It is written in javascript and it uses Vows (to API tests, whereas it allows to create dynamic contexts - test cases) and Mocha (to helpers tests).
 
