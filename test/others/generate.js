@@ -73,18 +73,6 @@ describe('Generate', function() {
                 done();
             });
         });
-        describe('randomLatLng', function() {
-            it('should return lat and lng', function(done) {
-                var randomValue = generate.randomLatLng;
-
-                randomValue.should.have.property('lat');
-                randomValue.lat.should.be.a('number');
-                randomValue.should.have.property('lng');
-                randomValue.lng.should.be.a('number');
-
-                done();
-            });
-        });
     });
 
 
