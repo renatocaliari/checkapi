@@ -1,24 +1,21 @@
-# DoForMeApiTest
+This generate dynamics scenarios based upon on a config file and test API calls and their responses.   
 
-Mini-initial-framework to generate dynamics scenarios to test APIs and call yours resources with those ones allowing you to make assertions on results.   
-
-It is written in javascript and it uses Vows (to API tests) and Mocha (to helpers tests).
-Vows allows to create dynamic contexts (test cases) to API.
+It is written in javascript and it uses Vows (to API tests, whereas it allows to create dynamic contexts - test cases) and Mocha (to helpers tests).
 
 ## Prerequisites
-Step 1: Install node and npm.
+**Step 1:** Install node and npm. 
 
-Step 2: Install all dependencies for the project.
+**Step 2:** Install all dependencies for the project.
 
 ```
 npm install
 ```
-Step 3: Install mocha for run tests of helpers.
+**Step 3:** Install mocha for run tests of helpers.
 
 ```
 npm install -g mocha
 ```
-Step 4: Install vows for run dynamic tests of API.
+**Step 4:** Install vows for run dynamic tests of API.
 
 ```
 npm install -g vows
