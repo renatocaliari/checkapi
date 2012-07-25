@@ -35,8 +35,7 @@ describe('Generate', function() {
                 scenario = buildScenario(200, 'picture', 'something.jpg', 'test');
             
             scenario.statusHttp.should.equal(200);
-            scenario.params[0].name.should.equal('picture');
-            scenario.params[0].value.should.equal('something.jpg');
+            scenario.params.length.should.equal(0);
             scenario.message.should.equal('test');
 
             done();
@@ -172,19 +171,16 @@ describe('Generate', function() {
         describe('generateScenario', function() {
             var generateScenario = Generate.__get__("generateScenario");
             it('should generate positive scenarios', function(done) {
-                var scenario = generateScenario(config, resources[0], 
+                var scenarios = generateScenario(config, resources[0], 
                      'positive');
-                console.log('11 scenario', scenario);
-                scenario.params.length.should.equal(3);
+                scenarios.length.should.equal(3);
 
                 done();
             });
             it('should generate negative scenario', function(done) {
-                var scenario = generateScenario(config, resources[0], 
+                var scenarios = generateScenario(config, resources[0], 
                      'negative');
-                console.log('22 scenario', scenario);
-
-                scenario.params.length.should.equal(3);
+                scenarios.length.should.equal(1);
 
                 done();
             });
