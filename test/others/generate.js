@@ -7,7 +7,7 @@ var rewire = require('rewire'),
     getDynamicValue, resources;
 
 describe('Generate', function() {
-    before(function() {
+    beforeEach(function() {
         generate = new Generate(config);
         Generate.__set__("configHelper", {
             randomText: function (arg) {
@@ -101,31 +101,90 @@ describe('Generate', function() {
 
 
     describe('Scenarios', function() { 
-        describe('setFieldsToResource', function() {
+        describe('getFieldsFromResource', function() {
             describe('get fields from default too', function() {
-                var setFieldsToResource = Generate.__get__("setFieldsToResource");
+                var getFieldsFromResource = Generate.__get__("getFieldsFromResource");
 
                 it('should set fields', function(done) {
-                    var fields = setFieldsToResource(config, resources[0]);
-
-                    done();
+                    var fields = getFieldsFromResource(config, resources[0]);
                 });         
             });
         });
+
+        describe('orderFields', function() {
+            var orderFields = Generate.__get__("orderFields");
+            it('should order fields', function(done) {
+                var fields = orderFields(fields);
+                done();
+            });         
+        });
+
+        describe('intoScenario', function() {
+            beforeEach(function(){
+                resources = config.resources;
+            });
+
+            it('should put new variation into scenario with others variations', function(done) {
+                var insertVariation, variation, nextVariation, field, scenario = {},
+                    getVariation = Generate.__get__("getVariation"),    
+                    intoScenario = Generate.__get__("intoScenario");
+                field = resources[0].params[0];
+                nextVariation = getVariation(field, 'positive');
+                insertVariation = intoScenario.bind(this, field);
+                _(2).times(function () {
+                    variation = nextVariation(scenario);
+                    scenario = insertVariation(scenario, variation);
+                });
+
+                scenario.params.length.should.equal(2);
+                done(); 
+            });
+        });
+
+        describe('getVariation', function() {
+            var getVariation;
+            beforeEach(function(){
+                getVariation = Generate.__get__("getVariation");
+                resources = config.resources;
+            });
+
+            it('should get variation', function(done) {
+                var variation, nextVariation;
+                nextVariation = getVariation(resources[0].params[0], 'positive');
+                variation = nextVariation();
+                variation.statusHttp.should.equal('200');
+                done();
+            });
+
+            it('should get first variation again when already used all variations', function(done) {
+                var saveVariation, variation, nextVariation;
+                nextVariation = getVariation(resources[0].params[0], 'positive');
+                saveVariation = nextVariation();
+                nextVariation();
+                nextVariation();
+                variation = nextVariation();
+
+                variation.value.should.equal(saveVariation.value);
+                done();
+            });
+        });
+
         describe('generateScenario', function() {
             var generateScenario = Generate.__get__("generateScenario");
             it('should generate positive scenarios', function(done) {
-                var scenarios = generateScenario(config, resources[0], 
+                var scenario = generateScenario(config, resources[0], 
                      'positive');
-                scenarios.length.should.equal(5);
+                console.log('11 scenario', scenario);
+                scenario.params.length.should.equal(3);
 
                 done();
             });
             it('should generate negative scenario', function(done) {
-                var scenarios = generateScenario(config, resources[0], 
+                var scenario = generateScenario(config, resources[0], 
                      'negative');
+                console.log('22 scenario', scenario);
 
-                scenarios.length.should.equal(6);
+                scenario.params.length.should.equal(3);
 
                 done();
             });
