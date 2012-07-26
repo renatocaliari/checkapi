@@ -118,52 +118,33 @@ describe('Generate', function() {
             });         
         });
 
-        describe('intoScenario', function() {
+        describe('setupVariation', function() {
+            var setupVariation, field;
             beforeEach(function(){
+                setupVariation = Generate.__get__("setupVariation");
                 resources = config.resources;
-            });
-
-            it('should put new variation into scenario with others variations', function(done) {
-                var insertVariation, variation, nextVariation, field, scenario = {},
-                    getVariation = Generate.__get__("getVariation"),    
-                    intoScenario = Generate.__get__("intoScenario");
                 field = resources[0].params[0];
-                nextVariation = getVariation(field, 'positive');
-                insertVariation = intoScenario.bind(this, field);
-                _(2).times(function () {
-                    variation = nextVariation(scenario);
-                    scenario = insertVariation(scenario, variation);
-                });
-
-                scenario.params.length.should.equal(2);
-                done(); 
-            });
-        });
-
-        describe('getVariation', function() {
-            var getVariation;
-            beforeEach(function(){
-                getVariation = Generate.__get__("getVariation");
-                resources = config.resources;
             });
 
             it('should get variation', function(done) {
                 var variation, nextVariation;
-                nextVariation = getVariation(resources[0].params[0], 'positive');
-                variation = nextVariation();
+                nextVariation = setupVariation('positive');
+                variation = nextVariation(field);
                 variation.statusHttp.should.equal('200');
+
                 done();
             });
 
             it('should get first variation again when already used all variations', function(done) {
                 var saveVariation, variation, nextVariation;
-                nextVariation = getVariation(resources[0].params[0], 'positive');
-                saveVariation = nextVariation();
-                nextVariation();
-                nextVariation();
-                variation = nextVariation();
 
+                nextVariation = setupVariation('positive');
+                saveVariation = nextVariation(field);
+                nextVariation(field);
+                nextVariation(field);
+                variation = nextVariation(field);
                 variation.value.should.equal(saveVariation.value);
+
                 done();
             });
         });
