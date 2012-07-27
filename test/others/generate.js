@@ -151,17 +151,10 @@ describe('Generate', function() {
 
         describe('generateScenario', function() {
             var generateScenario = Generate.__get__("generateScenario");
-            it('should generate positive scenarios', function(done) {
-                var scenarios = generateScenario(config, resources[0], 
-                     'positive');
-                scenarios.length.should.equal(3);
+            it('should generate scenarios', function(done) {
+                var scenarios = generateScenario(config, resources[0]);
 
-                done();
-            });
-            it('should generate negative scenario', function(done) {
-                var scenarios = generateScenario(config, resources[0], 
-                     'negative');
-                scenarios.length.should.equal(1);
+            scenarios.length.should.equal(10);
 
                 done();
             });
