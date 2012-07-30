@@ -59,14 +59,10 @@ describe('Client Api', function() {
                 Logger: mockLog
             }, config);
 
-
-
             api.send(scenario,
                     function(data, response, error, scenario) {
                         scenario.should.be.a('object');
-                        
                         parameters.should.eql({data: {}});
-
                         done();
                     }
                 );  
@@ -145,7 +141,7 @@ describe('Client Api', function() {
                     return this;
                 },
                 on: function(status, callback) {
-                    callback();
+                    callback(200, {raw: ""});
                 }
             };
         });

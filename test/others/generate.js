@@ -4,7 +4,7 @@ var rewire = require('rewire'),
     Generate = rewire('../../lib/helper/generate'),
     generate,
     config = require('../../test/api/configApiV1'),
-    getDynamicValue, resources;
+    getDynamicValue, resources = {};
 
 describe('Generate', function() {
     beforeEach(function() {
@@ -14,8 +14,8 @@ describe('Generate', function() {
                 return arg;
             }
         });
-
-        resources = config.resources;
+        resources = {};
+        _.extend(resources, config.resources);
     });
 
     describe('getDynamicValue', function() {
@@ -36,7 +36,6 @@ describe('Generate', function() {
             
             scenario.statusHttp.should.equal(200);
             scenario.params.length.should.equal(0);
-            scenario.message.should.equal('test');
 
             done();
         });
@@ -63,7 +62,7 @@ describe('Generate', function() {
     describe('Random Values', function() {
         describe('random: placeId', function() {
             it('should return a random placeId', function(done) {
-                var randomValue = generate.random(resources[0], 'rating'),
+                var randomValue = generate.random(resources[1], 'rating'),
                     rating = parseInt(randomValue, 10);
                 
                 rating.should.be.above(0);
@@ -75,11 +74,9 @@ describe('Generate', function() {
     });
 
 
-    describe('paramsToUrl', function() {
+    describe('setValueParamsToUrl', function() {
         it('should match url and return replaced with random value', function(done) {
-            var url = generate.paramsToUrl(
-                    'http://www.example.com/{placeId}/do/{placeId}',
-                    resources[0]);
+            var url = generate.setValueParamsToUrl(resources[1]);
             url.should.not.include('{placeId}');
 
             done();
@@ -106,7 +103,8 @@ describe('Generate', function() {
 
                 it('should set fields', function(done) {
                     var fields = getFieldsFromResource(config, resources[0]);
-                });         
+                    done();
+                });
             });
         });
 
@@ -115,22 +113,21 @@ describe('Generate', function() {
             it('should order fields', function(done) {
                 var fields = orderFields(fields);
                 done();
-            });         
+            });
         });
 
         describe('setupVariation', function() {
             var setupVariation, field;
             beforeEach(function(){
                 setupVariation = Generate.__get__("setupVariation");
-                resources = config.resources;
                 field = resources[0].params[0];
             });
 
             it('should get variation', function(done) {
                 var variation, nextVariation;
-                nextVariation = setupVariation('positive');
+                nextVariation = setupVariation();
                 variation = nextVariation(field);
-                variation.statusHttp.should.equal('200');
+                 variation.statusHttp.should.equal('200');
 
                 done();
             });
@@ -138,8 +135,9 @@ describe('Generate', function() {
             it('should get first variation again when already used all variations', function(done) {
                 var saveVariation, variation, nextVariation;
 
-                nextVariation = setupVariation('positive');
+                nextVariation = setupVariation();
                 saveVariation = nextVariation(field);
+                nextVariation(field);
                 nextVariation(field);
                 nextVariation(field);
                 variation = nextVariation(field);
@@ -147,14 +145,15 @@ describe('Generate', function() {
 
                 done();
             });
+
         });
 
         describe('generateScenario', function() {
             var generateScenario = Generate.__get__("generateScenario");
+
             it('should generate scenarios', function(done) {
                 var scenarios = generateScenario(config, resources[0]);
-
-            scenarios.length.should.equal(10);
+                scenarios.length.should.equal(10);
 
                 done();
             });
@@ -169,50 +168,15 @@ describe('Generate', function() {
             });
         });
 
-        describe('scenariosToResource: Positive', function() {
-            it('should return scenarios of happy paths', function(done) {
+        describe('scenariosToResource', function() {
+            it('should return scenarios', function(done) {
                 var scenarios =
-                    generate.scenariosToResource(resources[0], ['positive']);
+                    generate.scenariosToResource(resources[0]);
 
                 scenarios.length.should.equal(5);
 
                 done();
             });
-        });
-
-        describe('scenariosToFields: Negative', function() {
-            it('should return scenarios of boundary cases with no repeated combinations',
-                function(done) {
-                    var index,
-                        total,
-                        scenarios = generate.scenariosToResource(
-                            resources[0],
-                            ['negative']
-                        ),
-                        values = [];
-
-                    total = scenarios.length;
-                    for (index = total; index--;) {
-                        values.push(JSON.stringify(scenarios[index].values));
-                    }
-
-                    scenarios.length.should.equal(6);
-                    
-                    done();
-                }
-            );
-        });
-
-        describe('scenariosToFields: ALL Cases', function() {
-            it('should return scenarios with all cases (positive and negative)',
-                function(done) {
-                    var scenarios = generate.scenariosToResource(resources[0]);
-
-                    scenarios.length.should.equal(11);
-
-                    done();
-                }
-            );
         });
     });
 });
