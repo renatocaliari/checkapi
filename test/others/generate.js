@@ -33,7 +33,6 @@ describe('Generate', function() {
         it('should get the function, execute it and return the result', function(done) {
             var buildScenario = Generate.__get__("buildScenario"),
                 scenario = buildScenario(200, 'picture', 'something.jpg', 'test');
-            
             scenario.statusHttp.should.equal(200);
             scenario.params.length.should.equal(0);
 
@@ -64,7 +63,6 @@ describe('Generate', function() {
             it('should return a random placeId', function(done) {
                 var randomValue = generate.random(resources[1], 'rating'),
                     rating = parseInt(randomValue, 10);
-                
                 rating.should.be.above(0);
                 rating.should.be.below(6);
 
@@ -83,11 +81,10 @@ describe('Generate', function() {
         });
     });
 
-    describe('configToResource', function() {
-        it('should get config of correct url', function(done) {
+    describe('getResource', function() {
+        it('should get config-resource of correct url', function(done) {
             var configUrl;
-            configUrl = generate.configToResource('/places/{placeId}/reviews/new');
-            
+            configUrl = generate.getResource('/places/{placeId}/reviews/new');
             configUrl.auth.should.equal('oauth');
             configUrl.methodHttp.should.equal('put');
 
@@ -102,7 +99,7 @@ describe('Generate', function() {
                 var getFieldsFromResource = Generate.__get__("getFieldsFromResource");
 
                 it('should set fields', function(done) {
-                    var fields = getFieldsFromResource(config, resources[0]);
+                    var fields = getFieldsFromResource(resources[0]);
                     done();
                 });
             });
@@ -111,7 +108,7 @@ describe('Generate', function() {
         describe('orderFields', function() {
             var orderFields = Generate.__get__("orderFields");
             it('should order fields', function(done) {
-                var fields = orderFields(fields);
+                var fields = orderFields(resources[0]);
                 done();
             });
         });
@@ -123,7 +120,16 @@ describe('Generate', function() {
                 field = resources[0].params[0];
             });
 
-            it('should get variation', function(done) {
+            it('should get variation for scenario 400', function(done) {
+                var variation, nextVariation;
+                nextVariation = setupVariation();
+                variation = nextVariation(field, "400");
+                 variation.statusHttp.should.equal('400');
+
+                done();
+            });
+
+            it('should get variation for scenario 200', function(done) {
                 var variation, nextVariation;
                 nextVariation = setupVariation();
                 variation = nextVariation(field);
@@ -152,7 +158,7 @@ describe('Generate', function() {
             var generateScenario = Generate.__get__("generateScenario");
 
             it('should generate scenarios', function(done) {
-                var scenarios = generateScenario(config, resources[0]);
+                var scenarios = generateScenario(resources[0]);
                 scenarios.length.should.equal(10);
 
                 done();
@@ -173,7 +179,7 @@ describe('Generate', function() {
                 var scenarios =
                     generate.scenariosToResource(resources[0]);
 
-                scenarios.length.should.equal(5);
+                scenarios.length.should.equal(10);
 
                 done();
             });
