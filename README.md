@@ -62,30 +62,24 @@ Data for resources of your API.
 
 **"params"**: all data relative to params of that resource (or some dynamic value in URL).  
 **"name"**: param name.  
-**"scenario"**: two possible nested "child": "positive" and "negative".  
-
-Inside "positive" or "negative" scenario there will be an array of mappings containing "value" and "statusHttp". All those values will be tested on.  
-In a nutshell, the system will get a "value" from a scenario, either positive or negative, and will mix with all others needed params for that resource with POSITIVE values. It ensures that wheter is generating a negative scenario just current value is negative and others positive to test one negative thing by time. So, "statusHttp" make sense now, since expected result is relative to that specific value of the param, when it is sent with all others valid params.  
+**"scenario"**: an array of mappings containing "value" and "statusHttp". All those values will be tested on.  
+In a nutshell, the system will get a "value" from a scenario and will mix with all others needed params for that resource with POSITIVE (status http = 200) values. It ensures that wheter ypou are generating a negative scenario (e.g. status http = 400) so only current value is negative and others positive to test one negative thing by time. So, "statusHttp" make sense now, since expected result is relative to that specific value of the param, when it is sent with all others valid params.  
 
 Example: 
 ```
     "params": [
         "name": "rating",
-        "scenario": {
-            "positive": [
+        "scenario": [
                 {"value": "1", "statusHttp": "200"},
                 {"value": "2", "statusHttp": "200"},
                 {"value": "3", "statusHttp": "200"},
                 {"value": "4", "statusHttp": "200"},
-                {"value": "5", "statusHttp": "200"}
-            ],
-            "negative": [
+                {"value": "5", "statusHttp": "200"},
                 {"value": "0", "statusHttp": "400"},
                 {"value": "6", "statusHttp": "400"},
                 {"value": "a", "statusHttp": "400"},
                 {"value": "é", "statusHttp": "400"}
-            ]                
-         }
+         ]
     ]
 ```
 Params required by multiple resources can just referenced in params without "scenario".  
@@ -106,20 +100,16 @@ Put here all params (or dynamic value to urls) that you want to use with multipl
     [
         {
             "name": "type",
-            "scenario": {
-                "positive": [
+            "scenario": [
                     {"value": "json", "statusHttp": "200"},
-                    {"value": "xml", "statusHttp": "200"}                            
-                ],
-                "negative": [
+                    {"value": "xml", "statusHttp": "200"},
                     {"value": "a","statusHttp": "400"}
-                ]
-            } 
+            ]
         }
     ]
 ```
 
-### Dynamic values for positive scenario
+### Dynamic values for scenario
 
 Imagine that you need to test a resource that have a constraint to unique values. You can do it in the following way:
 Inside "value" of a scenario, type the char ***$*** followed by a valid function name.
@@ -128,11 +118,9 @@ Example:
 ```
  {
     "name": "content",
-    "scenario": {
-        "positive": [
-            { "value": "$randomText(20)", "statusHttp": "200" }
-        ]
-    } 
+    "scenario": [
+        { "value": "$randomText(20)", "statusHttp": "200" }
+    ]
 }
 ```
 
