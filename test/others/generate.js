@@ -173,16 +173,5 @@ describe('Generate', function() {
                 done();
             });
         });
-
-        describe('scenariosToResource', function() {
-            it('should return scenarios', function(done) {
-                var scenarios =
-                    generate.scenariosToResource(resources[0]);
-
-                scenarios.length.should.equal(10);
-
-                done();
-            });
-        });
     });
 });
