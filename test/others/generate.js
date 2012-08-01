@@ -159,7 +159,7 @@ describe('Generate', function() {
 
             it('should generate scenarios', function(done) {
                 var scenarios = generateScenario(resources[0]);
-                scenarios.length.should.equal(10);
+                scenarios.length.should.equal(5);
 
                 done();
             });
