@@ -3,6 +3,8 @@ Initially I intended make a mini-framework where I could assert any data of resu
 
 It is written in javascript and it uses Vows (to API tests, whereas it allows to create dynamic contexts - test cases) and Mocha (to helpers tests).
 
+If you plan to test other data and business logic of your API, so I suggest you to create tests (unit and integration) inside your API project so that you can get more detailed information and not rely on infrastructure, network and external services (you can mock and stub them).
+
 ## Prerequisites
 **Step 1:** Install node and npm. 
 
