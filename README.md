@@ -1,9 +1,10 @@
-That mini-framework generate dynamics scenarios based upon on a config file in addition to test API calls and their responses.
+That mini-framework generate dynamics scenarios based upon on a config file in addition to test API calls and their responses.  
 Initially I intended make a mini-framework where I could assert any data of results from API calls, but it ran away from my first intention of simplicity. So now,  the major purpose of that project is, briefly, mixing scenarios set to all resources of an API and ensuring that the HTTP status code is equal to what was set in config file.
 
 It is written in javascript and it uses Vows (to API tests, whereas it allows to create dynamic contexts - test cases) and Mocha (to helpers tests).
 
-If you plan to test other data and business logic of your API, so I suggest you to create tests (unit and integration) inside your API project so that you can get more detailed information and not rely on infrastructure, network and external services (you can mock and stub them).
+If you plan to test other data and business logic of your API, so I suggest you to create tests (unit and integration) inside your API project so that you can get more detailed information and not rely on infrastructure, network and external services (you can mock and stub them).  
+In the meantime, if you want to ensure the the proper operation of all involved with your API, in the simple way, and the basic behavior (send some data and expect specific HTTP status code), that project can help you.
 
 ## Prerequisites
 **Step 1:** Install node and npm. 
