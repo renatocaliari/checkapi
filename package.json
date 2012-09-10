@@ -1,19 +1,30 @@
 {
-  "name" : "client-rest-api-auth",
-  "description" : "Simple client API with no authentication, basic authentication or OAuth 1.0",
-  "version": "0.0.1",
-    "engines": {
-     "node": ">=0.6.19",
-     "npm": ">=1.1.24"
+    "name" : "checkapi",
+    "main": "index",
+    "description" : "Check api results",
+    "repository": {
+	"type": "git",
+	"url": "https://github.com/renatoac/checkapi.git"
     },
-  "dependencies": {
-    "util": ">= 0.4.9",
-    "oauth": ">= 0.9.7",
-    "restler": ">= 2.0.1",
-    "bunyan": ">= 0.10.0",
-    "should": ">= 0.6.3",
-    "mocha": ">= 1.2.0",
-    "vows": ">= 0.6.3",
-    "rewire": ">= 0.3.1"
-  }
+    "bin": {
+	"checkapi" : "index"
+    },
+    "version": "0.0.1",
+    "engines": {
+	"node": ">= 0.6.19",
+	"npm": ">= 1.1.24"
+    },
+    "dependencies": {
+	"util": ">= 0.4.9",
+	"oauth": ">= 0.9.7",
+	"restler": ">= 2.0.1",
+	"bunyan": ">= 0.10.0",
+	"should": ">= 0.6.3",
+	"mocha": ">= 1.2.0",
+	"vows": ">= 0.6.3",
+	"rewire": ">= 0.3.1"
+    },
+    "scripts": {
+	"test": "make test"
+    }
 }

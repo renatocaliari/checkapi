@@ -1,5 +1,5 @@
 var should = require('should'),
-    config = require('../api/configApiV1'),
+    config = require('./configApi'),
     Client = require('../../lib/client/client'),
     OAuth = require('oauth').OAuth,
     rest = require('restler'),

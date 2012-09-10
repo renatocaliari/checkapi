@@ -1,9 +1,9 @@
 var rewire = require('rewire'),
     _ = require('../../lib/helper/underscore-min.js'),
     should = require('should'),
+    config = require('../client/configApi'),
     Generate = rewire('../../lib/helper/generate'),
     generate,
-    config = require('../../test/api/configApiV1'),
     getDynamicValue, resources = {};
 
 describe('Generate', function() {
@@ -61,7 +61,7 @@ describe('Generate', function() {
     describe('Random Values', function() {
         describe('random: placeId', function() {
             it('should return a random placeId', function(done) {
-                var randomValue = generate.random(resources[1], 'rating'),
+                var randomValue = generate.random(resources[0], 'rating'),
                     rating = parseInt(randomValue, 10);
                 rating.should.be.above(0);
                 rating.should.be.below(6);
@@ -74,7 +74,7 @@ describe('Generate', function() {
 
     describe('setValueParamsToUrl', function() {
         it('should match url and return replaced with random value', function(done) {
-            var url = generate.setValueParamsToUrl(resources[1]);
+            var url = generate.setValueParamsToUrl(resources[0]);
             url.should.not.include('{placeId}');
 
             done();
@@ -124,7 +124,7 @@ describe('Generate', function() {
                 var variation, nextVariation;
                 nextVariation = setupVariation();
                 variation = nextVariation(field, "400");
-                 variation.statusHttp.should.equal('400');
+		variation.statusHttp.should.equal('400');
 
                 done();
             });
@@ -159,7 +159,7 @@ describe('Generate', function() {
 
             it('should generate scenarios', function(done) {
                 var scenarios = generateScenario(resources[0]);
-                scenarios.length.should.equal(5);
+                scenarios.length.should.equal(7);
 
                 done();
             });
