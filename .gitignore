@@ -1,5 +1,4 @@
 /test/api/*
-/config/*
 *.log
 *.sublime*
 .DS_Store

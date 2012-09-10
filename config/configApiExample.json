@@ -1,0 +1,65 @@
+{
+    "api": {
+        "pathBase": "http://url",
+        "debug": "false",
+        "showScenarioOnError": "true"
+    },
+    "auth": {
+        "requestTokenUrl": "http://url/request_token",
+        "accessTokenUrl": "http://url/access_token",
+        "authorizeUrl": "http://url/authorize",
+        "tokenKey": "abc",
+        "tokenSecret": "123",
+        "consumerKey": "abc",
+        "consumerSecret": "123"
+    },
+    "resources": [
+        {
+            "name": "Review a place",
+            "url": "/places/{placeId}/reviews/new",
+            "auth": "oauth",
+            "methodHttp": "put",
+            "params": [      
+                {   
+                    "name": "rating",
+                    "scenario": [
+                        {"value": "1", "statusHttp": "200"},
+                        {"value": "2", "statusHttp": "200"},
+                        {"value": "a", "statusHttp": "400"}
+                    ] 
+                }, 
+                {
+                    "name": "content",
+                    "scenario": [
+			{ "value": "content for tests", "statusHttp": "200" },
+			{ "value": "short", "statusHttp": "400" }
+                    ]
+                },
+                {
+                    "name": "type"
+                }
+            ]
+        }
+    ],
+    "paramsDefault":
+    [
+        {
+            "name": "type",
+            "scenario": [
+                    {"value": "xml", "statusHttp": "200"},
+                    {"value": "json", "statusHttp": "200"}
+            ]
+        },
+        {   "name": "place",
+            "scenario": [
+                { "value": "Pizzaria", "statusHttp": "200" }
+            ]
+        },
+        {   "name": "placeId",
+            "scenario": [
+                { "value": "C40452090D0A0Z0A05", "statusHttp": "200" }
+            ]
+        }
+    ]
+}
+
