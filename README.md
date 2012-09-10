@@ -41,9 +41,9 @@ make test-api
 
 ## How to configure 
 
-Modify the file configApiExample.json (rename it for better readability) with the config of your api.
+Open the file **/config/configApiExample.json** in order to follow the information below.
 
-Open the file **/test/configApiExample.json** in order to follow the information below.
+Modify that file (rename it for better readability) with the config of your api.
 
 ### API config
 Data related to api and debug.
