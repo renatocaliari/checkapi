@@ -1,13 +1,13 @@
 {
     "api": {
-        "pathBase": "http://123/api",
+        "pathBase": "http://url",
         "debug": "false",
         "showScenarioOnError": "true"
     },
     "auth": {
-        "requestTokenUrl": "http://123/v1-hm/oauth/request_token",
-        "accessTokenUrl": "http://123/v1-hm/oauth/access_token",
-        "authorizeUrl": "http://123/v1-hm/oauth/authorize",
+        "requestTokenUrl": "http://url/request_token",
+        "accessTokenUrl": "http://url/access_token",
+        "authorizeUrl": "http://url/authorize",
         "tokenKey": "abc",
         "tokenSecret": "123",
         "consumerKey": "abc",
