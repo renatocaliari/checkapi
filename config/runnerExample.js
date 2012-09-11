@@ -1,8 +1,7 @@
-scenariosVows.config(''); // Set the config file that contains the data to generate the scenarios
+scenariosVows.config(''); // Set the config file that contains the data to scenarios generation
 
-vows.describe('API').addBatch(
-{
-	'Call resource of': {	 
-	   'new review': scenarioVows.testCase('/places/{placeId}/reviews/new');
-	}
+vows.describe('API').addBatch({
+    'Call resource of': {	 
+	'new review': scenarioVows.testCase('/places/{placeId}/reviews/new');
+    }
 }
