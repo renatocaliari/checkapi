@@ -32,6 +32,6 @@
     },
     "preferGlobal": "true",
     "bin": {
-	"filesearch" : "lib/filesearch.js"
+	"" : "lib/filesearch.js"
     }
 }
