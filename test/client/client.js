@@ -15,7 +15,7 @@ var should = require('should'),
     version, 
     encryption,
     tokenKey, 
-    tokenSecret, 
+    tokenSecret,  
     parameters;
 
 describe('Client Api', function() {
